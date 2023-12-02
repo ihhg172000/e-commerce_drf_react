@@ -42,7 +42,7 @@ class CustomUserAdmin(UserAdmin):
                     "email",
                     "first_name",
                     "last_name",
-                    "phone"
+                    "phone",
                     "password1",
                     "password2",
                     "is_active",
