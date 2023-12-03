@@ -34,6 +34,7 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 INSTALLED_APPS = [
     'users',
+    'rest_framework',
     'phonenumber_field',
     'django.contrib.admin',
     'django.contrib.auth',
