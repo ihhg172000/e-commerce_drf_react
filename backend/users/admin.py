@@ -10,13 +10,13 @@ class CustomUserAdmin(UserAdmin):
     list_filter = ('email', 'is_active', 'is_staff', 'is_superuser')
     fieldsets = (
         (
-            _("Personal info"),
+            _("Info"),
             {
                 "fields": (
                     "email",
+                    "phone",
                     "first_name",
                     "last_name",
-                    "phone"
                 )
             }
         ),
@@ -40,9 +40,9 @@ class CustomUserAdmin(UserAdmin):
                 "classes": ("wide",),
                 "fields": (
                     "email",
+                    "phone",
                     "first_name",
                     "last_name",
-                    "phone",
                     "password1",
                     "password2",
                     "is_active",

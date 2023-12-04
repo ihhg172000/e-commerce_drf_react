@@ -1,17 +1,19 @@
-from rest_framework import generics
-from .models import CustomUser
-from .serializers import CustomUserSerializer
+from django.contrib.auth import get_user_model
+from rest_framework.generics import RetrieveUpdateDestroyAPIView
+from rest_framework.permissions import IsAuthenticated
+from .serializers import UserSerializer
 
 
-class CustomUserListCreateAPIView(
-    generics.ListCreateAPIView
+User = get_user_model()
+
+
+class AuthenticatedUserRetrieveUpdateDestroyAPIView(
+    RetrieveUpdateDestroyAPIView
 ):
-    queryset = CustomUser.objects.all()
-    serializer_class = CustomUserSerializer
+    serializer_class = UserSerializer
+    permission_classes = [
+        IsAuthenticated
+    ]
 
-
-class CustomUserRetrieveUpdateDestroyAPIView(
-    generics.RetrieveUpdateDestroyAPIView
-):
-    queryset = CustomUser.objects.all()
-    serializer_class = CustomUserSerializer
+    def get_object(self):
+        return self.request.user

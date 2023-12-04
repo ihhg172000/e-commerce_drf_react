@@ -1,8 +1,7 @@
 from django.urls import path
-from . import views
+from .views import AuthenticatedUserRetrieveUpdateDestroyAPIView
 
 
 urlpatterns = [
-    path('users/', views.CustomUserListCreateAPIView.as_view()),
-    path('users/<int:pk>/', views.CustomUserRetrieveUpdateDestroyAPIView.as_view())
+    path('me/', AuthenticatedUserRetrieveUpdateDestroyAPIView.as_view())
 ]
