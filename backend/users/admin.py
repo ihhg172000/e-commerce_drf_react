@@ -1,22 +1,25 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth import get_user_model
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import gettext_lazy as _
-from .models import CustomUser
 
 
-class CustomUserAdmin(UserAdmin):
-    model = CustomUser
+User = get_user_model()
+
+
+class UserAdmin(BaseUserAdmin):
     list_display = ('email', 'is_active', 'is_staff', 'is_superuser')
     list_filter = ('email', 'is_active', 'is_staff', 'is_superuser')
     fieldsets = (
         (
-            _("Info"),
+            None,
             {
                 "fields": (
                     "email",
                     "phone",
                     "first_name",
                     "last_name",
+                    "password"
                 )
             }
         ),
@@ -26,7 +29,6 @@ class CustomUserAdmin(UserAdmin):
                 "fields": (
                     "is_active",
                     "is_staff",
-                    "is_superuser",
                     "groups",
                     "user_permissions"
                 )
@@ -44,12 +46,7 @@ class CustomUserAdmin(UserAdmin):
                     "first_name",
                     "last_name",
                     "password1",
-                    "password2",
-                    "is_active",
-                    "is_staff",
-                    "is_superuser",
-                    "groups",
-                    "user_permissions"
+                    "password2"
                 )
             }
         ),
@@ -58,4 +55,4 @@ class CustomUserAdmin(UserAdmin):
     search_fields = ('email',)
 
 
-admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.register(User, UserAdmin)
