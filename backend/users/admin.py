@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import gettext_lazy as _
+from .models import Address
 
 
 User = get_user_model()
@@ -35,6 +36,7 @@ class UserAdmin(BaseUserAdmin):
             }
         ),
     )
+    add_form_template = None
     add_fieldsets = (
         (
             None,
@@ -56,3 +58,4 @@ class UserAdmin(BaseUserAdmin):
 
 
 admin.site.register(User, UserAdmin)
+admin.site.register(Address)

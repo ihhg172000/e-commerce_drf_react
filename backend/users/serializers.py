@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
+from .models import Address
 
 
 User = get_user_model()
@@ -33,3 +34,16 @@ class UserSerializer(serializers.ModelSerializer):
         except Exception:
             pass
         return super().update(instance, validated_data)
+
+
+class AddressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Address
+        fields = [
+            'id',
+            'country',
+            'state',
+            'city',
+            'street',
+            'zip_code'
+        ]
