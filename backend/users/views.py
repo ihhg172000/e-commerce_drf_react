@@ -52,7 +52,7 @@ class UserAddressesListCreateAPIView(
         data = request.data
         serializer = AddressSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
-            serializer.validated_data.setdefault('user_id', request)
+            serializer.validated_data.setdefault('user_id', request.user.id)
             serializer.save()
             return Response(serializer.validated_data)
         
