@@ -30,10 +30,11 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-AUTH_USER_MODEL = 'users.CustomUser'
+AUTH_USER_MODEL = 'users.User'
 
 INSTALLED_APPS = [
     'users',
+    'rest_framework',
     'phonenumber_field',
     'django.contrib.admin',
     'django.contrib.auth',

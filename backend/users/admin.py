@@ -1,22 +1,26 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth import get_user_model
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import gettext_lazy as _
-from .models import CustomUser
+from .models import Address
 
 
-class CustomUserAdmin(UserAdmin):
-    model = CustomUser
+User = get_user_model()
+
+
+class UserAdmin(BaseUserAdmin):
     list_display = ('email', 'is_active', 'is_staff', 'is_superuser')
     list_filter = ('email', 'is_active', 'is_staff', 'is_superuser')
     fieldsets = (
         (
-            _("Personal info"),
+            None,
             {
                 "fields": (
                     "email",
+                    "phone",
                     "first_name",
                     "last_name",
-                    "phone"
+                    "password"
                 )
             }
         ),
@@ -26,13 +30,13 @@ class CustomUserAdmin(UserAdmin):
                 "fields": (
                     "is_active",
                     "is_staff",
-                    "is_superuser",
                     "groups",
                     "user_permissions"
                 )
             }
         ),
     )
+    add_form_template = None
     add_fieldsets = (
         (
             None,
@@ -40,16 +44,11 @@ class CustomUserAdmin(UserAdmin):
                 "classes": ("wide",),
                 "fields": (
                     "email",
+                    "phone",
                     "first_name",
                     "last_name",
-                    "phone"
                     "password1",
-                    "password2",
-                    "is_active",
-                    "is_staff",
-                    "is_superuser",
-                    "groups",
-                    "user_permissions"
+                    "password2"
                 )
             }
         ),
@@ -58,4 +57,5 @@ class CustomUserAdmin(UserAdmin):
     search_fields = ('email',)
 
 
-admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.register(User, UserAdmin)
+admin.site.register(Address)
