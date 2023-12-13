@@ -34,6 +34,7 @@ AUTH_USER_MODEL = 'users.User'
 
 INSTALLED_APPS = [
     'users',
+    'shopping_cart',
     'rest_framework',
     'phonenumber_field',
     'django.contrib.admin',
