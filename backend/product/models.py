@@ -32,8 +32,8 @@ class Product(models.Model):
 	price = models.DecimalField(max_digits=7, decimal_places=2, default=0)
 	quantity = models.IntegerField(default=0)
 	#image = 
-	brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True)        # many to one 
-	category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True) # many to one
+	brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True)        
+	category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True) 
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
 	user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
