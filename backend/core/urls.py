@@ -8,4 +8,5 @@ urlpatterns = [
     path('api/', include('users.urls')),
 	path("product/", include("product.urls")),
     path('api/shopping_cart/', include('shopping_cart.urls')),
+    path('api/auth/', include('authentication.urls'))
 ]
