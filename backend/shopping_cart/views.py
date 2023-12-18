@@ -2,6 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Order, OrderItem, Cart, CartItem
 from users.models import User, Address
+from product.models import Product
 from .serializers import OrderSerializer, OrderItemSerializer, CartSerializer, CartItemSerializer
 
 # Create your views here.
