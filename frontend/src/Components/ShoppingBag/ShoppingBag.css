@@ -1,0 +1,23 @@
+.shopping-bag {
+  position: relative;
+  cursor: pointer;
+}
+
+.shopping-bag span {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 8px;
+  height: 8px;
+  background-color: var(--primaryColor);
+  border-radius: 50%;
+}
+
+.shopping-bag svg {
+  padding: 4px;
+  border-radius: 50%;
+}
+
+.shopping-bag svg:hover {
+  background-color: #33333333;
+}
