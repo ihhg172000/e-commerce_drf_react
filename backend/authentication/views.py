@@ -1,6 +1,8 @@
 from rest_framework import generics, status, permissions
 from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
 from users.models import User
+from .serializers import CustomUserSerializer # for LoginView
 from users.serializers import UserSerializer
 from django.contrib.auth import authenticate, login
 
@@ -23,8 +25,9 @@ class RegisterView(generics.CreateAPIView):
 
 
 class LoginView(generics.GenericAPIView):
-    serializer_class = UserSerializer
-
+    serializer_class = CustomUserSerializer
+    permission_classes = [AllowAny]
+    
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -32,14 +35,14 @@ class LoginView(generics.GenericAPIView):
         email = serializer.validated_data['email']
         password = serializer.validated_data['password']
 
-        user = authenticate(request, email=email, password=password)
-        if user is not None:
+        user = authenticate(email=email, password=password)
+        if user is not None and user.is_active:
             login(request, user)
             # Return user data
-            if not user.is_active:
-                return Response({"error": "User is not active"}, status=status.HTTP_400_BAD_REQUEST)
             data = self.get_serializer(user).data
             return Response(data, status=status.HTTP_200_OK)
+        elif user is not None and not user.is_active:
+            return Response({"error": "User is not active"}, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response({"error": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED)
 
